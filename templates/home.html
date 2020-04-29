@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Коллекция математических задач</title>
+</head>
+<body>
+    <h1>Коллекция математических задач</h1>
+    <p>Здесь Вы можете найти подборку задач на свой вкус и цвет, выбирая тематику и сложность</p>
+    <p>Пожалуйста, выберите интересующие Вас темы и сложность:</p>
+    <form action="/find_problems/" method="POST">
+        {% for tag in tags %}
+            <p><input type="checkbox" name={{tag}} value="1" checked>{{tag.capitalize()}}</p>
+        {% endfor %}
+        <p><strong>Выберите сложность</strong></p>
+        <p>От <select name="lower_complexity">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        до <select name="upper_complexity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected>5</option>
+            </select>
+        </p>
+        <button type="submit">Найти!</button>
+    </form>
+</body>
+</html>
