@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+    <script type="text/javascript">LatexIT.add('p',true);</script>
+    <meta charset="UTF-8">
+    <title>Коллекция математических задач</title>
+</head>
+<body>
+    <h1>Задачи</h1>
+    {% if not problems %}
+    <p>К сожалению, нам не удалось найти для Вас подходящих задач :(</p>
+    {% endif %}
+    <hr>
+    {% for i in range(4) %}
+    <p><b>Задача {{i + 1}}.</b>
+        <span style="font-size: large; ">{{problems[i].text}}</span>
+    </p>
+    <hr>
+    {% endfor %}
+</body>
+</html>

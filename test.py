@@ -15,15 +15,41 @@ class LoadingTest(unittest.TestCase):
     def test_problem_content(self):
         p = app.Problem(5, {'алгебра', 'теория чисел', 'комбинаторика'}, 'Сколько будет 2 + 2?\n')
         matches = 0
-        for x in self.problems:
-            if x.text == p.text and x.complexity == p.complexity and x.tags == p.tags:
-                matches += 1
-        if (matches == 0):
-            self.fail('Problem is not found')
+        self.assertTrue(p in self.problems)
 
     def test_tags_content(self):
         self.assertEqual(self.possible_tags, {'алгебра', 'теория чисел', 'чётность',
                                               'комбинаторика', 'алгоритмы'})
+
+
+class SortingTest(unittest.TestCase):
+    def setUp(self):
+        self.problems = app.load_problems('test_problems.txt')[0]
+        self.complexities = app.sort_by_complexity(self.problems)
+
+    def test_complexities(self):
+        for i in range(4):
+            for problem in self.complexities[i]:
+                self.assertTrue(i + 1 <= problem.complexity <= i + 2)
+
+
+class GeneratingOlympiadTest(unittest.TestCase):
+    def setUp(self):
+        self.problems = app.load_problems('test_problems_for_olympiad.txt')[0]
+        self.olympiad = app.generate_olympiad(self.problems)
+
+    def test_size(self):
+        self.assertEqual(len(self.olympiad), 4)
+
+    def test_complexities(self):
+        for i in range(4):
+            self.assertTrue(i + 1 <= self.olympiad[i].complexity <= i + 2)
+
+    def test_themes(self):
+        for i in range(4):
+            for j in range(4):
+                if i != j:
+                    self.assertFalse(self.olympiad[i].tags <= self.olympiad[j].tags)
 
 
 if __name__ == '__main__':
