@@ -17,6 +17,9 @@ class Problem:
         return self.complexity == other.complexity and \
                self.tags == other.tags and self.text == other.text
 
+    def __hash__(self):
+        return str.__hash__(self.text)
+
 
 suitable_problems = set()
 
@@ -82,7 +85,8 @@ problems, possible_tags = load_problems('problems.txt')
 colors = {'алгебра': 'orchid', 'геометрия': 'skyblue',
           'комбинаторика': 'lightgreen', 'теория чисел': 'crimson',
           'игры': 'cyan', 'чётность': 'darkkhaki', 'алгоритмы': 'navy',
-          1: 'lime', 2: 'yellowgreen', 3: 'gold', 4: 'orange', 5: 'red'}
+          1: 'lime', 2: 'yellowgreen', 3: 'gold', 4: 'orange', 5: 'red',
+          'неравенства': 'indigo'}
 
 
 @app.route('/', methods=['GET'])
